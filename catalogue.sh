@@ -4,10 +4,10 @@ echo -e "\e[31mInstall Nodejs\e[0m"
 yum install nodejs -y &>>/tmp/roboshop.log
 echo -e "\e[31mAdd application user\e[0m"
 useradd roboshop &>>/tmp/roboshop.log
-echo -e "\e[31mRemove application directory\e[0m"
-rm -f /app &>>/tmp/roboshop.log
+echo -e "\e[31mCreate application directory\e[0m"
+rm -ef /app &>>/tmp/roboshop.log
 mkdir /app &>>/tmp/roboshop.log
-echo -e "\e[31mAdd application user\e[0m"
+echo -e "\e[31mDownload application content\e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/roboshop.log
 cd /app &>>/tmp/roboshop.log
 echo -e "\e[31mExtract application content\e[0m"
