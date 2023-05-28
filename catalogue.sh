@@ -20,7 +20,7 @@ cp /root/roboshop-shell/catalogue.service vim /etc/systemd/system/catalogue.serv
 echo -e "\e[31mStart Catalogue service\e[0m" &>>/tmp/roboshop.log
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable catalogue &>>/tmp/roboshop.log
-systemctl start catalogue &>>/tmp/roboshop.log
+systemctl restart catalogue &>>/tmp/roboshop.log
 echo -e "\e[31mCopy mongodb repo\e[0m"
 cp /root/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log
 echo -e "\e[31mInstall mongodb client\e[0m"
