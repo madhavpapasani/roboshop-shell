@@ -8,7 +8,7 @@ echo -e "\e[34mExtracting frontend content\e[0m"
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>/tmp/roboshop.log
 echo -e "\e[34mUpdate Frontend Configuration\e[0m"
-cp ronoshop.config /etc/nginx/default.d/roboshop.conf
+cp roboshop.config /etc/nginx/default.d/roboshop.conf
 echo -e "\e[35mStarting Nginx Service\e[0m"
 systemctl enable nginx &>>/tmp/roboshop.log
 systemctl restart nginx &>>/tmp/roboshop.log
