@@ -16,7 +16,7 @@ cd /app
 echo -e "\e[31mInstall Nodejs dependencies\e[0m" &>>/tmp/roboshop.log
 npm install &>>/tmp/roboshop.log &>>/tmp/roboshop.log
 echo -e "\e[31mSetup SystemD service\e[0m"
-cp home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
+cp /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
 echo -e "\e[31mStart user service\e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable user &>>/tmp/roboshop.log
