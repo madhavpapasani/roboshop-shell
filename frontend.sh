@@ -8,9 +8,8 @@ echo -e "\e[34mExtracting frontend content\e[0m"
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 echo -e "\e[34mUpdate Frontend Configuration\e[0m"
-cp /home/centos/roboshop-shell/nginx.conf /etc/nginx/default.d/nginx.conf
+cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
 echo -e "\e[35mStarting Nginx Service\e[0m"
 systemctl relload nginx
 systemctl enable nginx
 systemctl restart nginx
-
