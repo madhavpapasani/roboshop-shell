@@ -15,6 +15,8 @@ unzip /tmp/cart.zip &>>/tmp/roboshop.log
 cd /app
 echo -e "\e[31mInstall Nodejs dependencies\e[0m"
 npm install &>>/tmp/roboshop.log
+echo -e "\e[31msetup systemD service\e[0m"
+cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service
 echo -e "\e[31mStart cart service\e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable cart &>>/tmp/roboshop.log
