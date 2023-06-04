@@ -3,7 +3,7 @@ nocolor="\e[0m"
 log_file="/tmp/roboshop.log"
 app_path="/app"
 stat_check(){
-   if [ $?1 -eq 0 ]; then
+   if [ $1 -eq 0 ]; then
            echo SUCCESS
     else
             echo FAILURE
