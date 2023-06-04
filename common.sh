@@ -15,7 +15,7 @@ app_presetup(){
        echo SUCCESS
        useradd roboshop &>>$log_file
   fi
-
+       stat_check $?
        echo -e "${color}Create application directory${nocolor}"
        rm -rf ${app_path} &>>${log_file}
        mkdir ${app_path} &>>${log_file}
