@@ -4,7 +4,11 @@ log_file="/tmp/roboshop.log"
 app_path="/app"
 app_presetup(){
   echo -e "${color}Add application user${nocolor}"
-    useradd roboshop &>>$log_file
+  if [ $? -eq 1 ]; then
+       echo SUCCESS
+       useradd roboshop &>>$log_file
+  fi
+
 
     if [ $? -eq 0 ]; then
            echo SUCCESS
