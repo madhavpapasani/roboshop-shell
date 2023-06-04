@@ -2,6 +2,13 @@ color="\e[31m"
 nocolor="\e[0m"
 log_file="/tmp/roboshop.log"
 app_path="/app"
+stat_check(){
+   if [ $?1 -eq 0 ]; then
+           echo SUCCESS
+    else
+            echo FAILURE
+    fi
+}
 app_presetup(){
   echo -e "${color}Add application user${nocolor}"
   if [ $? -eq 1 ]; then
@@ -9,63 +16,36 @@ app_presetup(){
        useradd roboshop &>>$log_file
   fi
 
-
-    if [ $? -eq 0 ]; then
-           echo SUCCESS
-    else
-            echo FAILURE
-    fi
-
        echo -e "${color}Create application directory${nocolor}"
        rm -rf ${app_path} &>>${log_file}
        mkdir ${app_path} &>>${log_file}
 
-      if [ $? -eq 0 ]; then
-             echo SUCCESS
-      else
-              echo FAILURE
-      fi
+      stat_check $?
 
         echo -e "${color}Download application content${nocolor}"
         curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip &>>$log_file
         cd ${app_path}
 
-       if [ $? -eq 0 ]; then
-              echo SUCCESS
-        else
-               echo FAILURE
-        fi
+       stat_check $?
 
         echo -e "${color}Extract application content${nocolor}"
         unzip /tmp/${component}.zip &>>$log_file
 
-       if [ $? -eq 0 ]; then
-              echo SUCCESS
-        else
-               echo FAILURE
-        fi
+       stat_check $?
 
 }
  systemd_setup(){
    echo -e "${color}Setup systemD service${nocolor}"
      cp /home/centos/roboshop-shell/${component}.service /etc/systemd/system/${component}.service &>>$log_file
 
-     if [ $? -eq 0 ]; then
-            echo SUCCESS
-      else
-             echo FAILURE
-      fi
+    stat_check $?
 
    echo -e "${color}Start ${component} service${nocolor}"
     systemctl daemon-reload &>>${log_file}
     systemctl enable ${component} &>>${log_file}
     systemctl restart ${component} &>>${log_file}
 
-    if [ $? -eq 0 ]; then
-        echo SUCCESS
-    else
-         echo FAILURE
-    fi
+    stat_check $?
 
   }
 nodejs() {
@@ -119,17 +99,15 @@ python() {
   echo -e "${color}Install Python${nocolor}"
   yum install python36 gcc python3-devel -y &>>${log_file}
 
-  if [ $? -eq 0 ]; then
-    echo Success
-  else
-     echo Failure
-   fi
+  stat_check $?
 
   app_presetup
 
   echo -e "${color}Install Application Dependencies${nocolor}"
   cd /app
   pip3.6 install -r requirements.txt &>>${log_file}
+
+  sed -i -e "s/roboshop_app_password/$1/" /home/centos/roboshop-shell/${component}.service
 
   systemd_setup
 

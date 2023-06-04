@@ -12,5 +12,5 @@ systemctl enable rabbitmq-server
 systemctl start rabbitmq-server
 
 echo -e "\e[31Add Rabbitmq Application user\e[0m"
-rabbitmqctl add_user roboshop roboshop123
+rabbitmqctl add_user roboshop $1
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
