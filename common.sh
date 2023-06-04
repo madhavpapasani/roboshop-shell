@@ -112,8 +112,8 @@ maven() {
 }
 
 python() {
-  echo -e "${color}mInstall Python${nocolor}"
-  yum install python36 gcc python3-devel -y
+  echo -e "${color}Install Python${nocolor}"
+  yum install python36 gcc python3-devel -y &>>${log_file}
 
   if [ $? -eq 0 ]; then
     echo Success
