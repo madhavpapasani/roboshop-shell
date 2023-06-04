@@ -72,3 +72,17 @@ maven() {
 
   systemd_setup
 }
+
+python() {
+  echo -e "${color}mInstall Python${nocolor}"
+  yum install python36 gcc python3-devel -y
+
+  app_presetup
+
+  echo -e "${color}Install Application Dependencies${nocolor}"
+  cd /app
+  pip3.6 install -r requirements.txt
+
+  systemd_setup
+
+}
