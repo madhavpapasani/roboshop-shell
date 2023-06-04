@@ -6,50 +6,50 @@ app_presetup(){
   echo -e "${color}Add application user${nocolor}"
     useradd roboshop &>>$log_file
 
-    if [ $? -eq 0]; then
-        echo Success
-      else
-         echo Failure
-       fi
+    if [ $? -eq 0 ]; then
+           echo SUCCESS
+    else
+            echo FAILURE
+    fi
 
        echo -e "${color}Create application directory${nocolor}"
        rm -rf ${app_path} &>>${log_file}
        mkdir ${app_path} &>>${log_file}
 
-       if [ $? -eq 0]; then
-           echo Success
-         else
-            echo Failure
-          fi
+      if [ $? -eq 0 ]; then
+             echo SUCCESS
+      else
+              echo FAILURE
+      fi
 
         echo -e "${color}Download application content${nocolor}"
         curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip &>>$log_file
         cd ${app_path}
 
-        if [ $? -eq 0]; then
-            echo Success
-          else
-             echo Failure
-           fi
+       if [ $? -eq 0 ]; then
+              echo SUCCESS
+        else
+               echo FAILURE
+        fi
 
         echo -e "${color}Extract application content${nocolor}"
         unzip /tmp/${component}.zip &>>$log_file
 
-        if [ $? -eq 0]; then
-            echo Success
-          else
-             echo Failure
-           fi
+       if [ $? -eq 0 ]; then
+              echo SUCCESS
+        else
+               echo FAILURE
+        fi
 
 }
  systemd_setup(){
    echo -e "${color}Setup systemD service${nocolor}"
      cp /home/centos/roboshop-shell/${component}.service /etc/systemd/system/${component}.service &>>$log_file
 
-     if [ $? -eq 0]; then
-         echo Success
-     else
-          echo Failure
+     if [ $? -eq 0 ]; then
+            echo SUCCESS
+      else
+             echo FAILURE
       fi
 
    echo -e "${color}Start ${component} service${nocolor}"
@@ -57,11 +57,11 @@ app_presetup(){
     systemctl enable ${component} &>>${log_file}
     systemctl restart ${component} &>>${log_file}
 
-    if [ $? -eq 0]; then
-        echo Success
-      else
-         echo Failure
-       fi
+    if [ $? -eq 0 ]; then
+        echo SUCCESS
+    else
+         echo FAILURE
+    fi
 
   }
 nodejs() {
@@ -114,7 +114,8 @@ maven() {
 python() {
   echo -e "${color}mInstall Python${nocolor}"
   yum install python36 gcc python3-devel -y
-  if [ $? -eq 0]; then
+
+  if [ $? -eq 0 ]; then
     echo Success
   else
      echo Failure
